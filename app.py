@@ -231,25 +231,25 @@ with st.expander("Configuración de las funciones de Oferta y Demanda", expanded
     with col_params:
         if metodo == "Algebraica":
             c1, c2, c3, c4 = st.columns(4)
-            with c1: a = st.number_input("a (intercepto dem)", value=1000.0, step=10.0)
-            with c2: b = st.number_input("b (pendiente dem)", value=30.0, step=1.0, min_value=0.01)
-            with c3: c = st.number_input("c (intercepto ofe)", value=0.0, step=10.0)
-            with c4: d = st.number_input("d (pendiente ofe)", value=20.0, step=1.0, min_value=0.01)
+            with c1: a = st.number_input("a (intercepto dem)", value=1000.0, step=10.0, format="%g")
+            with c2: b = st.number_input("b (pendiente dem)", value=30.0, step=1.0, min_value=0.01, format="%g")
+            with c3: c = st.number_input("c (intercepto ofe)", value=0.0, step=10.0, format="%g")
+            with c4: d = st.number_input("d (pendiente ofe)", value=20.0, step=1.0, min_value=0.01, format="%g")
             valid = True
         else:
             c1, c2, c3, c4 = st.columns(4)
             with c1:
-                dp1p = st.number_input("P₁ (dem)", value=10.0)
-                op1p = st.number_input("P₁ (ofe)", value=5.0)
+                dp1p = st.number_input("P₁ (dem)", value=10.0, format="%g")
+                op1p = st.number_input("P₁ (ofe)", value=5.0, format="%g")
             with c2:
-                dp1q = st.number_input("Q₁ (dem)", value=700.0)
-                op1q = st.number_input("Q₁ (ofe)", value=100.0)
+                dp1q = st.number_input("Q₁ (dem)", value=700.0, format="%g")
+                op1q = st.number_input("Q₁ (ofe)", value=100.0, format="%g")
             with c3:
-                dp2p = st.number_input("P₂ (dem)", value=30.0)
-                op2p = st.number_input("P₂ (ofe)", value=25.0)
+                dp2p = st.number_input("P₂ (dem)", value=30.0, format="%g")
+                op2p = st.number_input("P₂ (ofe)", value=25.0, format="%g")
             with c4:
-                dp2q = st.number_input("Q₂ (dem)", value=100.0)
-                op2q = st.number_input("Q₂ (ofe)", value=500.0)
+                dp2q = st.number_input("Q₂ (dem)", value=100.0, format="%g")
+                op2q = st.number_input("Q₂ (ofe)", value=500.0, format="%g")
 
             a_raw, b_raw = construir_desde_puntos(dp1p, dp1q, dp2p, dp2q, "demanda")
             c_raw, d_raw = construir_desde_puntos(op1p, op1q, op2p, op2q, "oferta")
@@ -351,11 +351,11 @@ with tabs[1]:
         st.markdown('<div class="section-title">Puntos de análisis</div>', unsafe_allow_html=True)
         c1, c2 = st.columns(2)
         with c1:
-            P1_e = st.number_input("P₁", value=float(round(P_eq * 0.8, 2)), key="P1e")
-            P2_e = st.number_input("P₂", value=float(round(P_eq * 1.2, 2)), key="P2e")
+            P1_e = st.number_input("P₁", value=float(round(P_eq * 0.8, 2)), key="P1e", format="%g")
+            P2_e = st.number_input("P₂", value=float(round(P_eq * 1.2, 2)), key="P2e", format="%g")
         with c2:
-            Q1_e = st.number_input("Q₁", value=float(round(a - b * P1_e, 2)), key="Q1e")
-            Q2_e = st.number_input("Q₂", value=float(round(a - b * P2_e, 2)), key="Q2e")
+            Q1_e = st.number_input("Q₁", value=float(round(a - b * P1_e, 2)), key="Q1e", format="%g")
+            Q2_e = st.number_input("Q₂", value=float(round(a - b * P2_e, 2)), key="Q2e", format="%g")
     with col_g2:
         fig2 = fig_base("Elasticidad — Puntos A y B")
         fig2.add_trace(go.Scatter(
