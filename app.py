@@ -4,7 +4,6 @@ import plotly.graph_objects as go
 
 st.set_page_config(
     page_title="Simulador de Mercado - UNSTA",
-    page_icon="📈",
     layout="wide"
 )
 
@@ -17,67 +16,73 @@ st.markdown("""
     .stApp {
         background: linear-gradient(180deg, #f4f7fc 0%, #eef3fb 45%, #f9fbff 100%);
     }
+    .block-container {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
     div[data-testid="stSidebar"] > div:first-child {
         background: rgba(255, 255, 255, 0.98);
         border-radius: 22px;
-        padding: 24px 22px 30px 22px;
+        padding: 16px 16px 20px 16px;
         box-shadow: 0 20px 40px rgba(15, 23, 42, 0.10);
         border: 1px solid rgba(29, 78, 216, 0.08);
     }
     div[data-testid="stSidebar"] .stMarkdown {
-        color: #475569;
-        font-size: .92rem;
-        line-height: 1.45;
+        color: #334155;
+        font-size: .90rem;
+        line-height: 1.4;
     }
     div[data-testid="stSidebar"] .sidebar-heading {
         font-size: 1rem;
         font-weight: 700;
         color: #1a237e;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
     }
     div[data-testid="stSidebar"] .sidebar-note {
         color: #475569;
-        font-size: .88rem;
-        line-height: 1.5;
-        margin-bottom: 10px;
+        font-size: .85rem;
+        line-height: 1.4;
+        margin-bottom: 8px;
     }
     div[data-testid="stSidebar"] .sidebar-list {
         padding-left: 1rem;
-        margin: 6px 0;
+        margin: 4px 0;
         color: #475569;
-        font-size: .88rem;
-        line-height: 1.5;
+        font-size: .85rem;
+        line-height: 1.4;
     }
     .main-header {
-        background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #e65100 100%);
-        padding: 10px 14px;
-        border-radius: 12px;
+        background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #4527a0 100%);
+        padding: 8px 14px;
+        border-radius: 8px;
         margin-bottom: 8px;
         color: white;
-        box-shadow: 0 10px 20px rgba(26, 35, 126, 0.15);
+        box-shadow: 0 4px 10px rgba(26, 35, 126, 0.1);
     }
-    .main-header h1 { margin: 0; font-size: 1.35rem; line-height: 1.05; }
+    .main-header h1 { margin: 0; font-size: 1.25rem; line-height: 1.05; }
     .main-header p  { margin: 2px 0 0; opacity: .85; font-size: .8rem; }
     .module-heading {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         font-weight: 700;
         color: #102a43;
-        margin-bottom: 4px;
+        margin-bottom: 2px;
     }
 
     .metric-card {
         background: white;
-        border-left: 5px solid #1a237e;
-        border-radius: 12px;
-        padding: 10px 12px;
-        margin: 6px 0;
-        box-shadow: 0 6px 14px rgba(15, 23, 42, 0.04);
+        border-left: 4px solid #1a237e;
+        border-radius: 8px;
+        padding: 6px 10px;
+        margin: 4px 0;
+        box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05);
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        gap: 8px;
-        min-height: 56px;
+        gap: 6px;
+        min-height: 48px;
         width: 100%;
     }
     .metric-card.green  { border-color: #2e7d32; }
@@ -85,94 +90,74 @@ st.markdown("""
     .metric-card.red    { border-color: #c62828; }
     .metric-card.purple { border-color: #6a1b9a; }
 
-    .metric-label { display: block; font-size: .7rem; color: #475569; font-weight: 700;
-                    text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
-    .metric-value { font-size: 1.15rem; font-weight: 800; color: #102a43; text-align: right; }
+    .metric-label { display: block; font-size: .65rem; color: #475569; font-weight: 700;
+                    text-transform: uppercase; letter-spacing: .05em; margin-bottom: 2px; }
+    .metric-value { font-size: 1.05rem; font-weight: 800; color: #102a43; text-align: right; }
     .metric-card.green  .metric-value { color: #2e7d32; }
     .metric-card.orange .metric-value { color: #e65100; }
     .metric-card.red    .metric-value { color: #c62828; }
     .metric-card.purple .metric-value { color: #6a1b9a; }
 
     .metric-card .metric-text {
-        flex: 1 1 55%;
+        flex: 1 1 50%;
         min-width: 0;
     }
     .metric-card .metric-value {
         flex: 0 0 auto;
-        min-width: 90px;
+        min-width: 80px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
     .result-panel {
         display: grid;
-        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 8px;
     }
 
     .info-box, .warning-box, .success-box {
-        border-radius: 12px;
-        padding: 10px 12px;
-        margin: 8px 0;
+        border-radius: 8px;
+        padding: 8px 10px;
+        margin: 6px 0;
         font-size: .85rem;
-        line-height: 1.4;
-        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+        line-height: 1.3;
+        box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05);
     }
     .info-box { background: #e8eaf6; color: #172b4d; }
     .warning-box { background: #fff4e5; color: #b56012; }
     .success-box { background: #e8f5e9; color: #1b5e20; }
 
     .section-title {
-        font-size: .95rem;
+        font-size: .90rem;
         font-weight: 700;
         color: #1a237e;
-        border-left: 3px solid #e65100;
-        padding-left: 8px;
-        margin: 10px 0 6px;
+        border-left: 3px solid #1a237e;
+        padding-left: 6px;
+        margin: 8px 0 4px;
     }
 
     .stMarkdown h2, .stMarkdown h3 {
         color: #1a237e;
     }
-
-    .css-1iyw2u1 { padding-top: 28px; }
     div[data-testid="stTabs"] button { font-weight: 700; }
+
+    /* Bordes negros permanentes para todos los recuadros de ingreso de datos */
+    div[data-baseweb="input"] > div {
+        border: 1px solid #000000 !important;
+        border-radius: 6px !important;
+    }
+    div[data-baseweb="input"] {
+        border: 1px solid #000000 !important;
+        border-radius: 6px !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
 # ─── Header ─────────────────────────────────────────────────────────────────
-# Módulo selection first, then dynamic header
-
-st.sidebar.markdown("""
-<div class="sidebar-heading">Navegación rápida</div>
-<div class="sidebar-note">Seleccioná un módulo para trabajar solo ese tema y ver los resultados sin desplazarte demasiado.</div>
-""", unsafe_allow_html=True)
-
-selected_module = st.sidebar.radio("Seleccionar módulo", [
-    "Módulo 1: Mercado",
-    "Módulo 2: Elasticidad",
-    "Precio Máximo",
-    "Precio Mínimo",
-    "Impuestos",
-    "Subsidios",
-    "Cuotas",
-], index=0)
-
-module_titles = {
-    "Módulo 1: Mercado": ("Mercado Competitivo", "Equilibrio de oferta y demanda"),
-    "Módulo 2: Elasticidad": ("Elasticidad de la Demanda", "Análisis de sensibilidad de mercado"),
-    "Precio Máximo": ("Precio Máximo", "Control de precios techo"),
-    "Precio Mínimo": ("Precio Mínimo", "Control de precios piso"),
-    "Impuestos": ("Incidencia Fiscal", "Efectos tributarios en el mercado"),
-    "Subsidios": ("Subsidios", "Efectos redistributivos del gobierno"),
-    "Cuotas": ("Cuotas de Producción", "Restricciones cuantitativas"),
-}
-
-title, subtitle = module_titles.get(selected_module, ("Simulador", "Economía"))
-
-st.markdown(f"""
+st.markdown("""
 <div class="main-header">
-  <h1>{title}</h1>
-  <p>{subtitle}</p>
+  <h1>Simulador de Mercado interactivo</h1>
+  <p>Economía para Ingenieros — UNSTA</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -220,15 +205,11 @@ def card(label, value, color=""):
 
 
 def card_grid(items):
-    for i in range(0, len(items), 2):
-        col_a, col_b = st.columns(2)
-        label, value, color = items[i]
-        with col_a:
-            card(label, value, color)
-        if i + 1 < len(items):
-            label, value, color = items[i + 1]
-            with col_b:
-                card(label, value, color)
+    html = '<div class="result-panel">'
+    for label, value, color in items:
+        html += f'<div class="metric-card {color}"><div class="metric-text"><div class="metric-label">{label}</div></div><div class="metric-value">{value}</div></div>'
+    html += '</div>'
+    st.markdown(html, unsafe_allow_html=True)
 
 COLORS = dict(
     demanda="#1565c0", oferta="#2e7d32",
@@ -242,52 +223,49 @@ COLORS = dict(
 # ═══════════════════════════════════════════════════════════════════════════
 # SIDEBAR — entrada de funciones
 # ═══════════════════════════════════════════════════════════════════════════
-with st.sidebar:
-    st.markdown("## ⚙️ Configurar Mercado")
-    metodo = st.radio("Método de ingreso", ["Forma algebraica", "Desde dos puntos"], key="metodo")
-    st.markdown("---")
-
-    if metodo == "Forma algebraica":
-        st.markdown("**Demanda:** Qd = a − b·P")
-        a = st.number_input("a (intercepto demanda)", value=1000.0, step=10.0)
-        b = st.number_input("b (pendiente demanda)", value=30.0, step=1.0, min_value=0.01)
-        st.markdown("**Oferta:** Qo = c + d·P")
-        c = st.number_input("c (intercepto oferta)", value=0.0, step=10.0)
-        d = st.number_input("d (pendiente oferta)", value=20.0, step=1.0, min_value=0.01)
-        valid = True
-    else:
-        st.markdown("**Demanda — dos puntos**")
-        col1, col2 = st.columns(2)
-        with col1:
-            dp1p = st.number_input("P₁ (dem)", value=10.0)
-            dp2p = st.number_input("P₂ (dem)", value=30.0)
-        with col2:
-            dp1q = st.number_input("Q₁ (dem)", value=700.0)
-            dp2q = st.number_input("Q₂ (dem)", value=100.0)
-
-        st.markdown("**Oferta — dos puntos**")
-        col3, col4 = st.columns(2)
-        with col3:
-            op1p = st.number_input("P₁ (ofe)", value=5.0)
-            op2p = st.number_input("P₂ (ofe)", value=25.0)
-        with col4:
-            op1q = st.number_input("Q₁ (ofe)", value=100.0)
-            op2q = st.number_input("Q₂ (ofe)", value=500.0)
-
-        a_raw, b_raw = construir_desde_puntos(dp1p, dp1q, dp2p, dp2q, "demanda")
-        c_raw, d_raw = construir_desde_puntos(op1p, op1q, op2p, op2q, "oferta")
-
-        if a_raw is None or b_raw is None or c_raw is None or d_raw is None:
-            st.error("Los puntos ingresados generan una curva vertical (P₁ = P₂). Revisá los datos.")
-            valid = False
-            a = b = c = d = 1.0
-        else:
-            a, b, c, d = a_raw, b_raw, c_raw, d_raw
+with st.expander("Configuración de las funciones de Oferta y Demanda", expanded=True):
+    col_metodo, col_params = st.columns([1, 4])
+    with col_metodo:
+        metodo = st.radio("Método de ingreso", ["Algebraica", "Dos puntos"], key="metodo")
+    
+    with col_params:
+        if metodo == "Algebraica":
+            c1, c2, c3, c4 = st.columns(4)
+            with c1: a = st.number_input("a (intercepto dem)", value=1000.0, step=10.0)
+            with c2: b = st.number_input("b (pendiente dem)", value=30.0, step=1.0, min_value=0.01)
+            with c3: c = st.number_input("c (intercepto ofe)", value=0.0, step=10.0)
+            with c4: d = st.number_input("d (pendiente ofe)", value=20.0, step=1.0, min_value=0.01)
             valid = True
-            st.info(f"Demanda deducida: Qd = {a:.2f} − {b:.2f}·P\n\nOferta deducida: Qo = {c:.2f} + {d:.2f}·P")
+        else:
+            c1, c2, c3, c4 = st.columns(4)
+            with c1:
+                dp1p = st.number_input("P₁ (dem)", value=10.0)
+                op1p = st.number_input("P₁ (ofe)", value=5.0)
+            with c2:
+                dp1q = st.number_input("Q₁ (dem)", value=700.0)
+                op1q = st.number_input("Q₁ (ofe)", value=100.0)
+            with c3:
+                dp2p = st.number_input("P₂ (dem)", value=30.0)
+                op2p = st.number_input("P₂ (ofe)", value=25.0)
+            with c4:
+                dp2q = st.number_input("Q₂ (dem)", value=100.0)
+                op2q = st.number_input("Q₂ (ofe)", value=500.0)
 
-    st.markdown("---")
-    st.caption("Ingeniería Informática — UNSTA")
+            a_raw, b_raw = construir_desde_puntos(dp1p, dp1q, dp2p, dp2q, "demanda")
+            c_raw, d_raw = construir_desde_puntos(op1p, op1q, op2p, op2q, "oferta")
+
+            if a_raw is None or b_raw is None or c_raw is None or d_raw is None:
+                st.error("Curva vertical (P₁ = P₂). Revisá los datos.")
+                valid = False
+                a = b = c = d = 1.0
+            else:
+                a, b, c, d = a_raw, b_raw, c_raw, d_raw
+                valid = True
+                st.info(f"Demanda: Qd = {a:.2f} − {b:.2f}·P | Oferta: Qo = {c:.2f} + {d:.2f}·P")
+
+st.markdown("<br>", unsafe_allow_html=True)
+tab_names = ["Mercado", "Elasticidad", "Precio Máximo", "Precio Mínimo", "Impuestos", "Subsidios", "Cuotas"]
+tabs = st.tabs(tab_names)
 
 # ═══════════════════════════════════════════════════════════════════════════
 # Equilibrio base
@@ -332,8 +310,8 @@ def fig_base(title=""):
                     bgcolor="rgba(255,255,255,0.94)", bordercolor="#dfe3e8", borderwidth=0.5,
                     font=dict(size=10)),
         plot_bgcolor="#fbfcfe", paper_bgcolor="#fbfcfe",
-        height=380,
-        margin=dict(l=60, r=25, t=100, b=35),
+        height=450,
+        margin=dict(l=40, r=20, t=50, b=25),
         hovermode="x unified",
     )
     fig.update_xaxes(gridcolor="#eeeeee", zeroline=True, zerolinecolor="#bbb")
@@ -344,8 +322,8 @@ def fig_base(title=""):
 # ══════════════════════════════════════════════════════
 # TAB 1 — Mercado competitivo
 # ══════════════════════════════════════════════════════
-if selected_module == "Módulo 1: Mercado":
-    col_g, col_r = st.columns([1.8, 1])
+with tabs[0]:
+    col_g, col_r = st.columns([2.5, 1])
     with col_g:
         fig = fig_base("Equilibrio de Mercado")
         fig.add_shape(type="line", x0=0, y0=P_eq, x1=Q_eq, y1=P_eq,
@@ -367,18 +345,17 @@ if selected_module == "Módulo 1: Mercado":
 # ══════════════════════════════════════════════════════
 # TAB 2 — Elasticidad (método punto medio Mankiw)
 # ══════════════════════════════════════════════════════
-if selected_module == "Módulo 2: Elasticidad":
-    col_i1, col_i2, col_i3, col_i4 = st.columns(4)
-    with col_i1:
-        P1_e = st.number_input("P₁", value=float(round(P_eq * 0.8, 2)), key="P1e")
-    with col_i2:
-        Q1_e = st.number_input("Q₁", value=float(round(a - b * P1_e, 2)), key="Q1e")
-    with col_i3:
-        P2_e = st.number_input("P₂", value=float(round(P_eq * 1.2, 2)), key="P2e")
-    with col_i4:
-        Q2_e = st.number_input("Q₂", value=float(round(a - b * P2_e, 2)), key="Q2e")
-
-    col_g2, col_r2 = st.columns([1.8, 1])
+with tabs[1]:
+    col_g2, col_r2 = st.columns([2.5, 1])
+    with col_r2:
+        st.markdown('<div class="section-title">Puntos de análisis</div>', unsafe_allow_html=True)
+        c1, c2 = st.columns(2)
+        with c1:
+            P1_e = st.number_input("P₁", value=float(round(P_eq * 0.8, 2)), key="P1e")
+            P2_e = st.number_input("P₂", value=float(round(P_eq * 1.2, 2)), key="P2e")
+        with c2:
+            Q1_e = st.number_input("Q₁", value=float(round(a - b * P1_e, 2)), key="Q1e")
+            Q2_e = st.number_input("Q₂", value=float(round(a - b * P2_e, 2)), key="Q2e")
     with col_g2:
         fig2 = fig_base("Elasticidad — Puntos A y B")
         fig2.add_trace(go.Scatter(
@@ -417,10 +394,10 @@ if selected_module == "Módulo 2: Elasticidad":
 # ══════════════════════════════════════════════════════
 # MÓDULO 3 — Precio Máximo
 # ══════════════════════════════════════════════════════
-if selected_module == "Precio Máximo":
-    col_ctrl, col_g3, col_r3 = st.columns([0.8, 1.5, 1.2])
-    
-    with col_ctrl:
+with tabs[2]:
+    col_g3, col_r3 = st.columns([2.5, 1])
+    with col_r3:
+        st.markdown('<div class="section-title">Controles</div>', unsafe_allow_html=True)
         P_max = st.slider("P máx", min_value=0.0,
                           max_value=float(P_eq * 2), value=float(P_eq * 0.7),
                           step=float(P_eq / 100))
@@ -462,10 +439,10 @@ if selected_module == "Precio Máximo":
 # ══════════════════════════════════════════════════════
 # MÓDULO 4 — Precio Mínimo
 # ══════════════════════════════════════════════════════
-if selected_module == "Precio Mínimo":
-    col_ctrl4, col_g4, col_r4 = st.columns([0.8, 1.5, 1.2])
-    
-    with col_ctrl4:
+with tabs[3]:
+    col_g4, col_r4 = st.columns([2.5, 1])
+    with col_r4:
+        st.markdown('<div class="section-title">Controles</div>', unsafe_allow_html=True)
         P_min = st.slider("P mín", min_value=0.0,
                           max_value=float(P_eq * 2), value=float(P_eq * 1.4),
                           step=float(P_eq / 100))
@@ -507,11 +484,11 @@ if selected_module == "Precio Mínimo":
 # ══════════════════════════════════════════════════════
 # MÓDULO 5 — Impuestos
 # ══════════════════════════════════════════════════════
-if selected_module == "Impuestos":
-    col_ctrl5a, col_ctrl5b = st.columns(2)
-    with col_ctrl5a:
+with tabs[4]:
+    col_g5, col_r5 = st.columns([2.5, 1])
+    with col_r5:
+        st.markdown('<div class="section-title">Controles</div>', unsafe_allow_html=True)
         tipo_imp = st.radio("Impuesto a:", ["Vendedores", "Compradores"])
-    with col_ctrl5b:
         t = st.slider("Monto ($)", min_value=0.0,
                       max_value=float(P_eq * 0.8), value=float(P_eq * 0.12),
                       step=float(P_eq / 200))
@@ -547,7 +524,6 @@ if selected_module == "Impuestos":
     inc_comp = (P_comp - P_eq) * Q_new
     inc_vend = (P_eq - P_vend) * Q_new
 
-    col_g5, col_r5 = st.columns([1.8, 1])
     with col_g5:
         fig5 = fig_base("Impuestos")
         fig5.add_trace(go.Scatter(x=curva_nueva_x, y=precios, name=label_curva,
@@ -572,11 +548,11 @@ if selected_module == "Impuestos":
 # ══════════════════════════════════════════════════════
 # MÓDULO 6 — Subsidios
 # ══════════════════════════════════════════════════════
-if selected_module == "Subsidios":
-    col_s1, col_s2 = st.columns(2)
-    with col_s1:
+with tabs[5]:
+    col_g6, col_r6 = st.columns([2.5, 1])
+    with col_r6:
+        st.markdown('<div class="section-title">Controles</div>', unsafe_allow_html=True)
         tipo_sub = st.radio("Subsidio a:", ["Productores", "Compradores"])
-    with col_s2:
         s_pct = st.slider("Subsidio (%)", min_value=0, max_value=80, value=10, step=1)
 
     s = s_pct / 100
@@ -611,7 +587,6 @@ if selected_module == "Subsidios":
         curva_x = Qd_sub_vals
         curva_label = "Demanda + subsidio"
 
-    col_g6, col_r6 = st.columns([1.8, 1])
     with col_g6:
         fig6 = fig_base("Subsidios")
         fig6.add_trace(go.Scatter(x=curva_x, y=precios, name=curva_label,
@@ -635,9 +610,10 @@ if selected_module == "Subsidios":
 # ══════════════════════════════════════════════════════
 # MÓDULO 7 — Cuotas
 # ══════════════════════════════════════════════════════
-if selected_module == "Cuotas":
-    col_ctrl7, _ = st.columns([1, 4])
-    with col_ctrl7:
+with tabs[6]:
+    col_g7, col_r7 = st.columns([2.5, 1])
+    with col_r7:
+        st.markdown('<div class="section-title">Controles</div>', unsafe_allow_html=True)
         Q_max_posible = float(Q_eq * 1.5)
         Q_cuota = st.slider("Cuota", min_value=1.0,
                             max_value=Q_max_posible, value=float(Q_eq * 0.75),
@@ -647,7 +623,6 @@ if selected_module == "Cuotas":
     Ps_cuota = (Q_cuota - c) / d if d != 0 else 0
     renta = max(0, Pd_cuota - Ps_cuota)
 
-    col_g7, col_r7 = st.columns([1.8, 1])
     with col_g7:
         fig7 = fig_base("Cuota")
         fig7.add_vline(x=Q_cuota, line_dash="dash", line_color=COLORS["cuota"], line_width=2.5)
